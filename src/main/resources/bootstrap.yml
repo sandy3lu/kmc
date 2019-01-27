@@ -36,6 +36,14 @@ spring:
           content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
           binder: defaultRabbit # 设置要绑定的消息服务的具体设置
           group: groupA # 指定分组名，防止负载时重复消费。（负载中分组名需设置不同值）PS：如有同时处理的需求，则不添加分组
+        my_output: # 这个名字是一个通道的名称，在分析具体源代码的时候会进行说明
+          destination: studyExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
+        my_input: # 这个名字是一个通道的名称，在分析具体源代码的时候会进行说明
+          destination: studyExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
 
 # 注册中心配置
 eureka:

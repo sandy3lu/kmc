@@ -39,6 +39,7 @@ eureka-client-2  -- 项目开发目录
 │  └─remote 远程调用接口
 │
 ├─stream 数据流操作（目前集成rabbitMQ）
+│  ├─channel 自定义通道
 │  ├─listener 消息监听（消费者）
 │  └─provider 消息发送（生产者）
 │
@@ -102,9 +103,24 @@ eureka-client-2  -- 项目开发目录
     1. 添加消费者，参考`IMessageListener`。
     
 - 消息队列 -- 自定义消息通道
-    1. 
-    1.
-    1. 
+    1. 添加自定义通道接口，参考`DefaultProcess`。
+    1. 修改配置文件`bootstrap.yml`,绑定通道如下。
+        ```
+        my_output: # 这个名字是一个通道的名称，在分析具体源代码的时候会进行说明
+          destination: studyExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
+        my_input: # 这个名字是一个通道的名称，在分析具体源代码的时候会进行说明
+          destination: studyExchange # 表示要使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+          binder: defaultRabbit # 设置要绑定的消息服务的具体设置
+        ```
+    1. 添加生产者,参考`MyMessageProvider`接口及其实现。
+    1. 添加消费者，参考`MyMessageListener`。
+    
+- 
+    
+PS：需根据业务需求统一规划。    
 
 ### 服务降级处理（熔断/回调）
 
