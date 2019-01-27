@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.runner;
+package com.yunjing.eurekaclient2.common.runner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

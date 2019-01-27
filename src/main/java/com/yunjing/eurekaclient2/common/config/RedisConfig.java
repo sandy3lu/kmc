@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.config;
+package com.yunjing.eurekaclient2.common.config;
 
 /**
  * @ClassName RedisConfig

@@ -1,6 +1,6 @@
-package com.yunjing.eurekaclient2.hystrix;
+package com.yunjing.eurekaclient2.feign.hystrix;
 
-import com.yunjing.eurekaclient2.remote.Client1Remote;
+import com.yunjing.eurekaclient2.feign.remote.Client1Remote;
 import org.springframework.stereotype.Component;
 
 /**

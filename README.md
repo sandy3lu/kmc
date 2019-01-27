@@ -91,12 +91,15 @@ eureka-client-2  -- 项目开发目录
     1. 添加服务映射接口，参考`Client1Remote`及其注释。
     1. 使用形式同普通service，例`TestController`中调用方式。
 
-- 消息队列 -- 默认模式（为方便测试，生产者、消费者写在相同微服务中） 
+- 消息队列 -- 默认通道（为方便测试，生产者、消费者写在相同微服务中） 
     1. 默认配置见`bootstrap.yml`中`stram`相关配置说明。
     1. 添加生产者,参考`IMessageProvider`接口及其实现。
     1. 添加消费者，参考`IMessageListener`。
     
-- 消息队列 -- 自定义模式
+- 消息队列 -- 自定义消息通道
+    1. 
+    1.
+    1. 
 
 ### 服务降级处理（熔断/回调）
 
@@ -119,7 +122,7 @@ eureka-client-2  -- 项目开发目录
     
     参考`EurekaClient2ApplicationTests`中相关测试方法`testRedis()`、`testRedisObj()`。
     
-- 自动根据方法生成缓存
+PS：使用方式同单体应用，功能demo不一一列举。    
 
 ### mybatis-plus 使用
 

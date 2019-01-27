@@ -1,6 +1,6 @@
 package com.yunjing.eurekaclient2;
 
-import com.yunjing.eurekaclient2.provider.IMessageProvider;
+import com.yunjing.eurekaclient2.stream.provider.IMessageProvider;
 import com.yunjing.eurekaclient2.web.entity.DictConstant;
 import org.junit.Assert;
 import org.junit.Test;

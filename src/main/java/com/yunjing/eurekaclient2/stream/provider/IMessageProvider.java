@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.provider;
+package com.yunjing.eurekaclient2.stream.provider;
 
 import com.yunjing.eurekaclient2.web.entity.DictConstant;
 

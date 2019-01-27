@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.config;
+package com.yunjing.eurekaclient2.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

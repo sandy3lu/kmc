@@ -1,7 +1,7 @@
 package com.yunjing.eurekaclient2.web.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.yunjing.eurekaclient2.remote.Client1Remote;
+import com.yunjing.eurekaclient2.feign.remote.Client1Remote;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

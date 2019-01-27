@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.config;
+package com.yunjing.eurekaclient2.common.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;

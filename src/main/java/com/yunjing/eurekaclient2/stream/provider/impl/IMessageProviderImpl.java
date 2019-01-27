@@ -1,6 +1,6 @@
-package com.yunjing.eurekaclient2.provider.impl;
+package com.yunjing.eurekaclient2.stream.provider.impl;
 
-import com.yunjing.eurekaclient2.provider.IMessageProvider;
+import com.yunjing.eurekaclient2.stream.provider.IMessageProvider;
 import com.yunjing.eurekaclient2.web.entity.DictConstant;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;

@@ -1,6 +1,6 @@
-package com.yunjing.eurekaclient2.remote;
+package com.yunjing.eurekaclient2.feign.remote;
 
-import com.yunjing.eurekaclient2.hystrix.Client1RemoteHystrix;
+import com.yunjing.eurekaclient2.feign.hystrix.Client1RemoteHystrix;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

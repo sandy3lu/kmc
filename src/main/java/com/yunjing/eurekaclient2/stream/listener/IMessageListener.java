@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.listener;
+package com.yunjing.eurekaclient2.stream.listener;
 
 import com.yunjing.eurekaclient2.web.entity.DictConstant;
 import org.springframework.cloud.stream.annotation.EnableBinding;
