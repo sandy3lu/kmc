@@ -1,0 +1,23 @@
+server:
+  port: 8082  #服务端口号
+
+spring:
+  application:
+    name: client-consumer # 注册服务名
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/tx-manager?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    connectionTimeout: 300
+    maxIdleTime: 600
+    maxPoolSize: 10
+    initialization-mode: always # always : 始终执行初始化
+    schema: classpath*:/sql/db_structure.sql # 初始化表结构
+    data: classpath*:/sql/db_init_data.sql # 初始化数据
+    continue-on-error: true # 遇到语句错误时是否继续(创建相同表/导入相同数据会报错，因此设置为true)
+
+# mybatis-plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml
+
