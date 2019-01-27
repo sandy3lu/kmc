@@ -1,5 +1,9 @@
 # 微服务开发 demo
 
+> 使用前需修改`application.yml`配置文件中服务名`spring.application.name`（非常重要）。
+
+> 按需修改数据源地址及服务端口号。
+
 ## 开发环境
 
 > 根据实际需要增删
@@ -66,8 +70,14 @@ eureka-client-2  -- 项目开发目录
 
 ### 熔断监控：Hystrix Dashboard
 
+- 熔断监控
+
 浏览器访问<http://[server-ip]:[port]/hystrix>，进入 Hystrix Dashboard 。
 输入`http://[server-ip]:[port]/actuator/hystrix.stream`,点击`Monitor Stream`可查看自身微服务熔断情况。
+
+- spring boot 服务监控：actuator
+
+浏览器访问<http://[server-ip]:[port]/actuator/health>，可查看服务状态。
 
 ### 分布式追踪（Sleuth with Zipkin via HTTP）
 
@@ -86,7 +96,7 @@ eureka-client-2  -- 项目开发目录
     1. 添加生产者,参考`IMessageProvider`接口及其实现。
     1. 添加消费者，参考`IMessageListener`。
     
-- 消息队列 -- 
+- 消息队列 -- 自定义模式
 
 ### 服务降级处理（熔断/回调）
 
