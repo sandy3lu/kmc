@@ -101,6 +101,7 @@ eureka-client-2  -- 项目开发目录
     1. 默认配置见`bootstrap.yml`中`stram`相关配置说明。
     1. 添加生产者,参考`IMessageProvider`接口及其实现。
     1. 添加消费者，参考`IMessageListener`。
+    1. 使用参考`EurekaClient2ApplicationTests`。
     
 - 消息队列 -- 自定义消息通道
     1. 添加自定义通道接口，参考`DefaultProcess`。
@@ -117,10 +118,27 @@ eureka-client-2  -- 项目开发目录
         ```
     1. 添加生产者,参考`MyMessageProvider`接口及其实现。
     1. 添加消费者，参考`MyMessageListener`。
+    1. 使用参考`EurekaClient2ApplicationTests`。
     
-- 
+- 设置 RoutingKey
+
+> 之前发送消息模式为广播，所有消费者均会收到消息。可在客户端设置`RoutingKey`实现直连消息。
+
+添加配置如下（分别在生产端及消费端配置）：
+
+```
+    stream:
+      rabbit:
+        bindings:
+          my_input:
+            consumer:
+              bindingRoutingKey: myKey.* # 设置一个RoutingKey信息
+          my_output:
+            producer:
+              routing-key-expression: '''myKey.*''' # 定义 RoutingKey 的表达式配置
+```
     
-PS：需根据业务需求统一规划。    
+PS：Stream 集成RabbitMQ，其默认是topic模式。    
 
 ### 服务降级处理（熔断/回调）
 

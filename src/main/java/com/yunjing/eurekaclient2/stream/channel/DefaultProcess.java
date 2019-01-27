@@ -5,6 +5,7 @@ import org.springframework.cloud.stream.annotation.Output;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.SubscribableChannel;
 
+// 输入输出最好不要定义在同一个接口中，此处为方便测试，未分别定义
 public interface DefaultProcess {
 
     String OUTPUT = "my_output";

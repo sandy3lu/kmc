@@ -16,6 +16,14 @@ spring:
         enabled: true # 开启通过服务名发现配置中心
         service-id: config-server # 指定配置中心的service-id，便于扩展为高可用配置集群。
     stream:
+      rabbit:
+        bindings:
+          my_input:
+            consumer:
+              bindingRoutingKey: myKey.* # 设置一个RoutingKey信息
+          my_output:
+            producer:
+              routing-key-expression: '''myKey.*''' # 定义 RoutingKey 的表达式配置
       binders: # 在此处配置要绑定的rabbitmq的服务信息；
         defaultRabbit: # 表示定义的名称，用于于binding整合
           type: rabbit # 消息组件类型
@@ -44,6 +52,7 @@ spring:
           destination: studyExchange # 表示要使用的Exchange名称定义
           content-type: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
           binder: defaultRabbit # 设置要绑定的消息服务的具体设置
+          group: myGroupA
 
 # 注册中心配置
 eureka:

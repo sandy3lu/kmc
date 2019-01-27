@@ -35,6 +35,9 @@ public class EurekaClient2ApplicationTests {
     @Resource
     private MyMessageProvider myMessageProvider;
 
+    /**
+     * stream 测试
+     */
     @Test
     public void testSend() {
         DictConstant dictConstant = new DictConstant();
@@ -44,6 +47,10 @@ public class EurekaClient2ApplicationTests {
         myMessageProvider.send(dictConstant);
     }
 
+    /***
+     * redis测试
+     * @throws Exception
+     */
     @Test
     public void testRedis() throws Exception {
         // set
@@ -53,6 +60,10 @@ public class EurekaClient2ApplicationTests {
         Assert.assertEquals("value", value);
     }
 
+    /***
+     * redis测试
+     * @throws Exception
+     */
     @Test
     public void testRedisObj() throws Exception {
         DictConstant dictConstant = new DictConstant();
