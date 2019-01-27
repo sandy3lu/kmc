@@ -115,6 +115,12 @@ eureka-client-2  -- 项目开发目录
 
 > 根据需求配置使用，配置文件参考`application.yml`。
 
+- 使用模板
+    
+    参考`EurekaClient2ApplicationTests`中相关测试方法`testRedis()`、`testRedisObj()`。
+    
+- 自动根据方法生成缓存
+
 ### mybatis-plus 使用
 
 - 代码自动生成（mapper、controller、entity、xml等）

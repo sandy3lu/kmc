@@ -1,9 +1,9 @@
 server:
-  port: 8082  #����˿ں�
+  port: 8082  #服务端口号
 
 spring:
   application:
-    name: client-consumer # ע�������
+    name: client-consumer # 注册服务名
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/tx-manager?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
@@ -12,12 +12,24 @@ spring:
     connectionTimeout: 300
     maxIdleTime: 600
     maxPoolSize: 10
-    initialization-mode: always # always : ʼ��ִ�г�ʼ��
-    schema: classpath*:/sql/db_structure.sql # ��ʼ�����ṹ
-    data: classpath*:/sql/db_init_data.sql # ��ʼ������
-    continue-on-error: true # ����������ʱ�Ƿ����(������ͬ��/������ͬ���ݻᱨ�����������Ϊtrue)
+    initialization-mode: always # always : 始终执行初始化
+    schema: classpath*:/sql/db_structure.sql # 初始化表结构
+    data: classpath*:/sql/db_init_data.sql # 初始化数据
+    continue-on-error: true # 遇到语句错误时是否继续(创建相同表/导入相同数据会报错，因此设置为true)
+  redis:
+    database: 0  # Redis数据库索引（默认为0）
+    host: 192.168.20.134 # Redis服务器地址
+    port: 6379  # Redis服务器连接端口
+    password:  # Redis服务器连接密码（默认为空）
+    timeout: 0ms # 连接超时时间（毫秒）
+    jedis:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        min-idle: 0 # 连接池中的最小空闲连接
 
-# mybatis-plus ����
+# mybatis-plus 配置
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
 
