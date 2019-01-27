@@ -1,6 +1,6 @@
 package com.yunjing.eurekaclient2.web.entity;
 
-import com.yunjing.eurekaclient2.base.BaseEntity;
+import com.yunjing.eurekaclient2.common.base.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;

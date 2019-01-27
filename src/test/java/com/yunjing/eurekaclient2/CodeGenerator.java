@@ -61,7 +61,7 @@ public class CodeGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass("com.yunjing.eurekaclient2.base.BaseEntity"); // 实体继承的根类
+        strategy.setSuperEntityClass("com.yunjing.eurekaclient2.common.base.BaseEntity"); // 实体继承的根类
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setInclude(tables);

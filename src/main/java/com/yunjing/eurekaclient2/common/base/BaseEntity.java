@@ -1,4 +1,4 @@
-package com.yunjing.eurekaclient2.base;
+package com.yunjing.eurekaclient2.common.base;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

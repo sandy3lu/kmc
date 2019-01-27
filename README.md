@@ -27,16 +27,21 @@ auto    -- 自动代码生成默认文件夹
 │
 │
 eureka-client-2  -- 项目开发目录
+├─common 通用模块
+│  ├─base 继承根类 
+│  ├─config 配置类 
+│  ├─enums 枚举类
+│  ├─runner 初始化runner
+│  └─utils 工具类
 │
-├─base 继承根类 
-├─config 配置类 
-├─enums 枚举类
-├─hystrix 熔断处理类
-├─listener 消息监听（消费者）
-├─provider 消息发送（生产者）
-├─remote 远程调用接口
-├─runner 初始化runner
-├─utils 工具类
+├─feign 远程调用
+│  ├─hystrix 熔断处理类
+│  └─remote 远程调用接口
+│
+├─stream 数据流操作（目前集成rabbitMQ）
+│  ├─listener 消息监听（消费者）
+│  └─provider 消息发送（生产者）
+│
 ├─web 前后台交互模块
 │  ├─controller 前端控制器
 │  ├─mapper 数据表映射
