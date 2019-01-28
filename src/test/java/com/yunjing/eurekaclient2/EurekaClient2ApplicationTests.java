@@ -1,7 +1,6 @@
 package com.yunjing.eurekaclient2;
 
-import com.yunjing.eurekaclient2.stream.provider.IMessageProvider;
-import com.yunjing.eurekaclient2.stream.provider.MyMessageProvider;
+
 import com.yunjing.eurekaclient2.web.entity.DictConstant;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,8 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,23 +26,7 @@ public class EurekaClient2ApplicationTests {
     public void contextLoads() {
     }
 
-    @Resource
-    private IMessageProvider messageProvider;
 
-    @Resource
-    private MyMessageProvider myMessageProvider;
-
-    /**
-     * stream 测试
-     */
-    @Test
-    public void testSend() {
-        DictConstant dictConstant = new DictConstant();
-        dictConstant.setId(1); // 继承的属性值不发送
-        dictConstant.setValue("hello world !");
-        messageProvider.send(dictConstant);
-        myMessageProvider.send(dictConstant);
-    }
 
     /***
      * redis测试

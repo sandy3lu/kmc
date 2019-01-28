@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 通用字典表 前端控制器
+ * key管理表 前端控制器
  * </p>
  *
  * @author scyking-auto
- * @since 2019-01-23
+ * @since 2019-01-28
  */
 @RestController
-@RequestMapping("/web/dict-constant")
-public class DictConstantController {
+@RequestMapping("/web/keys")
+public class KeysController {
 
 }

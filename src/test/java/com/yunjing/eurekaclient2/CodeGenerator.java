@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 public class CodeGenerator {
 
     // 需生成的表
-    public static String[] tables = {"dict_constant"};
+    public static String[] tables = {"keys"};
     // 模块名
     public static String moduleName = "web";
 
@@ -31,7 +31,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         // gc.setOutputDir("E:/works/sublime/eureka-client-2/src/main/java"); // 根据自己工程进行修改
-        gc.setOutputDir("E:/works/sublime/eureka-client-2/auto"); // 不建议直接覆盖工程中代码。自动生成后，手动复制
+        gc.setOutputDir("F:/PaaS/code/eureka-client-2/auto"); // 不建议直接覆盖工程中代码。自动生成后，手动复制
         gc.setAuthor("scyking-auto"); // 注释中作者信息
         gc.setOpen(false);
         // 自定义文件命名。（%s 会自动填充表实体属性）
@@ -44,10 +44,10 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/tx-manager?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8");
+        dsc.setUrl("jdbc:mysql://192.168.20.16:3306/pms_kmc?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("root");
+        dsc.setUsername("kmc");
+        dsc.setPassword("kmc");
         mpg.setDataSource(dsc);
 
         // 包配置
