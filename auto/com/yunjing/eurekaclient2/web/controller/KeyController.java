@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author scyking-auto
- * @since 2019-01-28
+ * @since 2019-01-29
  */
 @RestController
-@RequestMapping("/web/keys")
-public class KeysController {
+@RequestMapping("/web/key")
+public class KeyController {
 
 }

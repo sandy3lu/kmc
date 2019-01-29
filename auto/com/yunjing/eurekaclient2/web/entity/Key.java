@@ -12,12 +12,12 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author scyking-auto
- * @since 2019-01-28
+ * @since 2019-01-29
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class Keys extends BaseEntity {
+public class Key extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -45,6 +45,11 @@ public class Keys extends BaseEntity {
      * key的签名值
      */
     private String signature;
+
+    /**
+     * 签名用的key
+     */
+    private Integer signKey;
 
     /**
      * 创建时间

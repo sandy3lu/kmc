@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 public class CodeGenerator {
 
     // 需生成的表
-    public static String[] tables = {"keys"};
+    public static String[] tables = {"key"};
     // 模块名
     public static String moduleName = "web";
 

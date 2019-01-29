@@ -1,6 +1,6 @@
 package com.yunjing.eurekaclient2.web.mapper;
 
-import com.yunjing.eurekaclient2.web.entity.Keys;
+import com.yunjing.eurekaclient2.web.entity.Key;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author scyking-auto
  * @since 2019-01-28
  */
-public interface KeysMapper extends BaseMapper<Keys> {
+public interface KeyMapper extends BaseMapper<Key> {
 
 }

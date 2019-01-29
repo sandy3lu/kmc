@@ -17,14 +17,14 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class Keys extends BaseEntity {
+public class Key extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 申请创建key的用户id
      */
-    private Integer userId;
+    private String userId;
 
     /**
      * key的类型
@@ -45,11 +45,6 @@ public class Keys extends BaseEntity {
      * key的签名值
      */
     private String signature;
-
-    /**
-     * 签名用的key
-     */
-    private Integer signKey;
 
     /**
      * 创建时间

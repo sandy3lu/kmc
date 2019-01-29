@@ -67,7 +67,10 @@ public class InitApplicationRunner implements ApplicationRunner {
     @Value("${user.define.crypto.password}")
     public String password;
 
-    public PrivateKey privateKey;
+    @Value("${user.define.crypto.alias}")
+    public String alias;
+
+
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -85,12 +88,9 @@ public class InitApplicationRunner implements ApplicationRunner {
             if (useToken.toLowerCase().contains("false")) {
                 KeyStore pkcs12 = KeyStore.getInstance("PKCS12", "BC");
                 pkcs12.load(new FileInputStream(keyfile), password.toCharArray());
-                privateKey = (PrivateKey)pkcs12.getKey("privateKey", null);
-                Certificate[] pubCerts = pkcs12.getCertificateChain("privateKey");
-                ValueOperations<String, PrivateKey> operations = redisTemplate.opsForValue();
-                operations.set("pms.kmc.obj.key", privateKey);
-                ValueOperations<String, Certificate> operation = redisTemplate.opsForValue();
-                operation.set("pms.kmc.obj.cert", pubCerts[0]);
+                BCECPrivateKey privateKey = (BCECPrivateKey)pkcs12.getKey(alias, null);
+                Certificate[] pubCerts = pkcs12.getCertificateChain(alias);
+
             }else{
                 // TODO: use token
 
@@ -109,7 +109,7 @@ public class InitApplicationRunner implements ApplicationRunner {
                 KeyPairGenerator g = KeyPairGenerator.getInstance("EC", "BC");
                 g.initialize(new ECNamedCurveGenParameterSpec("sm2p256v1"));
                 KeyPair p = g.generateKeyPair();
-                privateKey = p.getPrivate();
+                BCECPrivateKey privateKey = (BCECPrivateKey)p.getPrivate();
                 //save to file
                 X509Certificate cert = null;
                 try {
@@ -125,11 +125,6 @@ public class InitApplicationRunner implements ApplicationRunner {
                     logger.info("save p12 error : " + e.getMessage());
                     return;
                 }
-
-                ValueOperations<String, BCECPrivateKey> operations = redisTemplate.opsForValue();
-                operations.set("pms.kmc.obj.key", (BCECPrivateKey)privateKey);
-                ValueOperations<String, Certificate> operation = redisTemplate.opsForValue();
-                operation.set("pms.kmc.obj.cert", cert);
 
             }
             catch (Exception e)
@@ -196,7 +191,7 @@ public class InitApplicationRunner implements ApplicationRunner {
         KeyStore store = null;
         store = KeyStore.getInstance("PKCS12", "BC");
         store.load(null, null);
-        store.setKeyEntry("privateKey", privKey, null, chain);
+        store.setKeyEntry(alias, privKey, null, chain);
 
         char[] passwd = password.toCharArray();
         store.store(new FileOutputStream(keyfile), passwd);
