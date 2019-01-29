@@ -46,7 +46,7 @@ public interface KeyService extends IService<Key> {
     String sm2enc(String publicKey, byte[] data) throws IOException, InvalidCipherTextException;
 
 
-    String sm2dec(String userID, int keyID, byte[] data) throws InvalidCipherTextException;
+    String sm2dec(String userID, int keyID, byte[] data) throws InvalidCipherTextException, IOException;
 
     boolean check() throws NoSuchProviderException, KeyStoreException, IOException, UnrecoverableKeyException, NoSuchAlgorithmException, CertificateException;
 

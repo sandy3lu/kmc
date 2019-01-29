@@ -1,5 +1,6 @@
 package com.yunjing.eurekaclient2.web.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.yunjing.eurekaclient2.common.base.BaseEntity;
 import java.time.LocalDateTime;
 import lombok.Data;
@@ -17,6 +18,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@TableName("tb_key")
 public class Key extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

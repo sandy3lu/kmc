@@ -1,6 +1,9 @@
 package com.yunjing.eurekaclient2.common.base;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * @ClassName CmdExeUtil
@@ -39,8 +42,26 @@ public class CmdExeUtil {
      */
     public static void winCmd(String cmd) throws IOException, InterruptedException {
         String[] myCmd = {"cmd", "/C", cmd};
+        System.out.println(myCmd.toString());
         Process proc = Runtime.getRuntime().exec(myCmd);
-        proc.waitFor();
+        InputStreamReader isr = new InputStreamReader(proc.getErrorStream());
+        BufferedReader br = new BufferedReader(isr);
+        String line = null;
+        System.out.println("<error></error>");
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        int exitVal = proc.waitFor();
+        isr=new InputStreamReader(proc.getInputStream());
+        br=new BufferedReader(isr);
+        line=null;
+        System.out.println("<info></info>");
+        while((line=br.readLine())!=null)
+        {
+            System.out.println(line);
+        }
+
+        System.out.println("Process exitValue: " + exitVal);
     }
 
     /**

@@ -7,6 +7,7 @@ import com.yunjing.eurekaclient2.web.mapper.KeyMapper;
 import com.yunjing.eurekaclient2.web.service.KeyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.NonNull;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.crypto.CryptoException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
@@ -43,10 +44,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -150,8 +148,19 @@ public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeySe
     public boolean deleteKey(String userID, int keyID) {
         Key key = getKey(userID,keyID);
         if(key != null){
-            return this.removeById(keyID);
+            boolean result = this.removeById(keyID);
+            if(result) {
+                // delete associated public key
+                int pubID = key.getRelatedKey();
+                if(pubID>1){
+                    return this.removeById(pubID);
+                }else{
+                    return result;
+                }
 
+            }else{
+                return result;
+            }
         }
         return false;
     }
@@ -186,24 +195,19 @@ public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeySe
     }
 
     @Override
-    public String sm2dec(String userID, int keyID, byte[] data) throws InvalidCipherTextException {
+    public String sm2dec(String userID, int keyID, byte[] data) throws InvalidCipherTextException, IOException {
         Key key = getKey(userID,keyID);
         if(key == null){
             return null;
         }else{
             if (useToken.toLowerCase().contains("false")) {
                 byte[] keydata = ByteUtils.fromHexString(key.getContent());
-                BigInteger q = new BigInteger(1,keydata);
-                ECCurve curve = new SM2P256V1Curve();
-                BigInteger SM2_ECC_N = new BigInteger(
-                        "FFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123", 16);
-                BigInteger SM2_ECC_GX = new BigInteger(
-                        "32C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7", 16);
-                BigInteger SM2_ECC_GY = new BigInteger(
-                        "BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A0", 16);
-                ECPoint G_POINT = curve.createPoint(SM2_ECC_GX, SM2_ECC_GY);
-                ECDomainParameters ecDomainParameters = new ECDomainParameters(curve,G_POINT,SM2_ECC_N  );
-                ECPrivateKeyParameters ecKeyParameters = new ECPrivateKeyParameters(q,ecDomainParameters);
+                org.bouncycastle.asn1.pkcs.PrivateKeyInfo privateKeyInfo = PrivateKeyInfo.getInstance(keydata);
+                BCECPrivateKey privateKey= (BCECPrivateKey)BouncyCastleProvider.getPrivateKey(privateKeyInfo);
+                ECParameterSpec localECParameterSpec = privateKey.getParameters();
+                ECDomainParameters localECDomainParameters = new ECDomainParameters(localECParameterSpec.getCurve(),
+                        localECParameterSpec.getG(), localECParameterSpec.getN());
+                ECPrivateKeyParameters ecKeyParameters = new ECPrivateKeyParameters(privateKey.getD(),localECDomainParameters);
                 SM2Engine sm2Engine = new SM2Engine();
                 sm2Engine.init(false,ecKeyParameters);
                 byte[] result = sm2Engine.processBlock(data,0,data.length);
@@ -236,11 +240,11 @@ public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeySe
                 boolean result = varifySM2Signature(tbsign,signature,ecPublicKeyParameters,false);
                 if(!result){
                     errKey.add(key);
-                    logger.info("key " + key.getId() + " fail integrity check");
+                    logger.info("key ID  " + key.getId() + " fail integrity check");
                 }
             }else{
                 uncheckKey.add(key);
-                logger.info("key " + key.getId() + " does not check integrity");
+                logger.info("key ID " + key.getId() + " does not check integrity");
             }
         }
 
@@ -355,6 +359,20 @@ public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeySe
             Key[] result = new Key[2];
             result[PRIVATE_KEY] = pkey;
             result[PUBLIC_KEY] = key;
+
+            // test enc&dec
+            String s = "welcome to china!";
+            String ss = Base64.getUrlEncoder().encodeToString(s.getBytes());
+            byte[] tmp = Base64.getUrlDecoder().decode(ss);
+            String enc = sm2enc(key.getContent(),tmp);
+            byte[] encdata = Base64.getUrlDecoder().decode(enc);
+            String dec = sm2dec(userID,pkey.getId(),encdata);
+            byte[] decdata = Base64.getUrlDecoder().decode(dec);
+            if(Arrays.equals(s.getBytes(),decdata)){
+                System.out.printf("ok");
+            }else{
+                System.out.printf("fail");
+            }
             return result;
         }else{
             // TODO: use token
